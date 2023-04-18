@@ -36,7 +36,8 @@ public class Plant : MonoBehaviour
         if (place != null)
         {
             place.item = Instantiate(plantPrefab, place.place);
-            place.item.MoveToParent(place.place, true);
+            place.item.transform.position = place.place.position + Vector3.down;
+            place.item.MoveToParent(place.place);
         }
     }
 

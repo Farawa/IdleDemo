@@ -40,11 +40,25 @@ public class ShelfForItems : MonoBehaviour
     private void UpdatePlaces()
     {
         itemPositions.Clear();
-        for(int i = 0; i < placesParent.childCount; i++)
+        for (int i = 0; i < placesParent.childCount; i++)
         {
             var plant = new PlantItem();
             plant.place = placesParent.GetChild(i);
             itemPositions.Add(plant);
         }
+    }
+
+    public CollectableItem GetItem()
+    {
+        for (int i = itemPositions.Count - 1; i >= 0; i--)
+        {
+            if (itemPositions[i].isBusy)
+            {
+                var place = itemPositions[i];
+                itemPositions[i].item = null;
+                return place.item;
+            }
+        }
+        return null;
     }
 }
